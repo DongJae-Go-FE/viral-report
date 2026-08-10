@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이럴 마케팅 — 네이버 카페 | 수도권 아파트 주간 가격 변동</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ══════════ 사이드 목차 ══════════ -->
+  <nav class="toc" aria-label="목차">
+    <p class="toc-label">목차</p>
+    <ol>
+      <li><a href="#overview">프로젝트 개요</a></li>
+      <li><a href="#report">바이럴 현황 및 결과 보고</a></li>
+      <li><a href="#why-cafe">왜 네이버 카페인가</a></li>
+      <li><a href="#analysis">분석 및 파악</a></li>
+      <li><a href="#result">결과 — 바이럴의 효과</a></li>
+      <li><a href="#next">다음 스텝 — 실거래가 알리미</a></li>
+    </ol>
+  </nav>
+
+  <main class="content">
+
+    <!-- ══════════ 헤더 ══════════ -->
+    <header class="hero">
+      <p class="eyebrow">프롭테크운영UNIT · 워크샵 공유자료</p>
+      <h1>바이럴 마케팅<span class="hero-dash">—</span>네이버 카페</h1>
+      <p class="hero-sub">프로젝트 <strong>「수도권 아파트 주간 가격 변동」</strong> 바이럴 운영 결과와,
+      직접 부딪히며 파악한 네이버 카페 알고리즘 분석을 공유합니다.</p>
+      <div class="hero-meta">
+        <span>가동재 매니저 · 프론트엔드 개발</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>2026. 08</span>
+      </div>
+    </header>
+
+    <!-- 핵심 지표 -->
+    <section class="stats" aria-label="핵심 지표">
+      <div class="stat">
+        <p class="stat-value"><span class="count" data-count="19">19</span><span class="stat-unit">건</span></p>
+        <p class="stat-label">바이럴 게시글</p>
+      </div>
+      <div class="stat">
+        <p class="stat-value"><span class="count" data-count="52245">52,245</span><span class="stat-unit">+</span></p>
+        <p class="stat-label">누적 조회수 <span class="stat-note">16건 집계 기준</span></p>
+      </div>
+      <div class="stat">
+        <p class="stat-value"><span class="count" data-count="40">40</span><span class="stat-unit">/ 56</span></p>
+        <p class="stat-label">글쓰기 권한 확보 카페</p>
+      </div>
+      <div class="stat">
+        <p class="stat-value">~<span class="count" data-count="10">10</span><span class="stat-unit">%</span></p>
+        <p class="stat-label">DAU 기여 (GA 기준)</p>
+      </div>
+    </section>
+
+    <!-- ══════════ 01 프로젝트 개요 ══════════ -->
+    <section id="overview" class="section">
+      <h2><span class="sec-num">01</span>프로젝트 개요</h2>
+
+      <div class="overview-grid">
+        <div class="card">
+          <p class="card-label">프로젝트명</p>
+          <p class="card-title">수도권 아파트 주간 가격 변동</p>
+          <p class="card-desc">수도권 아파트의 주간 가격 변동 데이터를 콘텐츠로 만들어, 지역별 네이버 카페에 위클리로 배포하는 바이럴 프로젝트입니다.</p>
+        </div>
+        <div class="card">
+          <p class="card-label">참여인원 · 총 3명</p>
+          <ul class="member-list">
+            <li>
+              <span class="member-name">가동재 매니저 <em>프롭테크운영UNIT</em></span>
+              <span class="member-role">PM · 컨텐츠 기획 · 디자인 · 개발 · 바이럴 마케팅</span>
+            </li>
+            <li>
+              <span class="member-name">김지혜 매니저 <em>프롭테크운영UNIT</em></span>
+              <span class="member-role">데이터 추출</span>
+            </li>
+            <li>
+              <span class="member-name">변영주 매니저 <em>프롭테크리서치LAB</em></span>
+              <span class="member-role">데이터 검수</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 02 바이럴 현황 및 결과 보고 ══════════ -->
+    <section id="report" class="section">
+      <h2><span class="sec-num">02</span>바이럴 현황 및 결과 보고</h2>
+      <p class="section-lead">총 19건의 게시글을 배포했고, 집계 가능한 16건의 누적 조회수는 <strong>52,245회</strong>입니다.
+      조회수 많은 순으로 정리했습니다. <span class="muted">(조회수: 2026. 8. 10 기준 · 멤버 공개 글 3건은 API 집계 불가)</span></p>
+
+      <div class="table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th>카페명</th>
+              <th>게시글</th>
+              <th class="col-views">조회수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-rank">1</td>
+              <td class="cafe-name">부동산 스터디</td>
+              <td><a href="https://cafe.naver.com/jaegebal/6393829" target="_blank" rel="noopener">규제 지역 근황</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">10,192</span><span class="bar"><i style="--w:100%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">2</td>
+              <td class="cafe-name">아름다운 내집갖기</td>
+              <td><a href="https://cafe.naver.com/rainup/3548815" target="_blank" rel="noopener">인천 검단(구 서구)에도 이제 상승 온기가 퍼지는 것 같네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">7,423</span><span class="bar"><i style="--w:72.8%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">3</td>
+              <td class="cafe-name">안양톡 (안양·의왕·군포·과천)</td>
+              <td><a href="https://cafe.naver.com/anyangtalk/850729" target="_blank" rel="noopener">동안구도 이제 불장 시작인듯요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">4,735</span><span class="bar"><i style="--w:46.5%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">4</td>
+              <td class="cafe-name">아름다운 내집갖기</td>
+              <td><a href="https://cafe.naver.com/rainup/3551911" target="_blank" rel="noopener">김포도 이제 불장 초입이네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">4,218</span><span class="bar"><i style="--w:41.4%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">5</td>
+              <td class="cafe-name">동탄2신도시 분양 정보</td>
+              <td><a href="https://cafe.naver.com/ehdxks2/820545" target="_blank" rel="noopener">동탄 온기가 끝나지 않았습니다</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">3,797</span><span class="bar"><i style="--w:37.3%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">6</td>
+              <td class="cafe-name">의정부 양주 부동산의 모든것</td>
+              <td><a href="https://cafe.naver.com/uwc8/116204" target="_blank" rel="noopener">의정부도 불장 초입이네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">3,470</span><span class="bar"><i style="--w:34.0%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">7</td>
+              <td class="cafe-name">아름다운 내집갖기</td>
+              <td><a href="https://cafe.naver.com/rainup/3552957" target="_blank" rel="noopener">광주에도 드디어 온기가 오네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">3,255</span><span class="bar"><i style="--w:31.9%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">8</td>
+              <td class="cafe-name">올댓고양 (고양·일산·창릉)</td>
+              <td><a href="https://cafe.naver.com/thtufs/81932" target="_blank" rel="noopener">덕양구에 온기가 장난 아니네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">3,122</span><span class="bar"><i style="--w:30.6%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">9</td>
+              <td class="cafe-name">안양톡 (안양·의왕·군포·과천)</td>
+              <td><a href="https://cafe.naver.com/anyangtalk/847930" target="_blank" rel="noopener">의왕역 sk뷰 59B 자금 계획 짜고 있는데</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">3,022</span><span class="bar"><i style="--w:29.7%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">10</td>
+              <td class="cafe-name">안양톡 (안양·의왕·군포·과천)</td>
+              <td><a href="https://cafe.naver.com/anyangtalk/851818" target="_blank" rel="noopener">의왕 불장 스타트</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">2,491</span><span class="bar"><i style="--w:24.4%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">11</td>
+              <td class="cafe-name">수도권의 중심 “수원”</td>
+              <td><a href="https://cafe.naver.com/suwon1city/246913" target="_blank" rel="noopener">장안구 불장 진입</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">2,422</span><span class="bar"><i style="--w:23.8%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">12</td>
+              <td class="cafe-name">수도권의 중심 “수원”</td>
+              <td><a href="https://cafe.naver.com/suwon1city/246845" target="_blank" rel="noopener">권선구에도 온기가 오기 시작했네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">1,849</span><span class="bar"><i style="--w:18.1%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">13</td>
+              <td class="cafe-name">렛츠용인</td>
+              <td><a href="https://cafe.naver.com/kmsjavaonline/67531" target="_blank" rel="noopener">수지든 기흥이든 처인구까지… 지금 용인 자체가 상승장 진입한 거 같습니다</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">1,134</span><span class="bar"><i style="--w:11.1%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">14</td>
+              <td class="cafe-name">부동산 스터디</td>
+              <td><a href="https://cafe.naver.com/jaegebal/6405556" target="_blank" rel="noopener">규제 지역 근황</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">812</span><span class="bar"><i style="--w:8.0%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">15</td>
+              <td class="cafe-name">강원도 맘카페</td>
+              <td><a href="https://cafe.naver.com/zmzm6506/58921" target="_blank" rel="noopener">리버뷰 아이파크 84B 옵션 훈수 부탁드려요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">155</span><span class="bar"><i style="--w:1.5%"></i></span></div></td>
+            </tr>
+            <tr>
+              <td class="col-rank">16</td>
+              <td class="cafe-name">내집장만 아카데미</td>
+              <td><a href="https://cafe.naver.com/ishift/1129708" target="_blank" rel="noopener">병점구가 리드하네요</a></td>
+              <td class="col-views"><div class="views"><span class="views-num">148</span><span class="bar"><i style="--w:1.5%"></i></span></div></td>
+            </tr>
+            <tr class="row-pending">
+              <td class="col-rank">—</td>
+              <td class="cafe-name">내집장만 아카데미</td>
+              <td><a href="https://naver.me/5nhEqSTI" target="_blank" rel="noopener">naver.me/5nhEqSTI</a></td>
+              <td class="col-views"><span class="badge-pending">멤버 공개 · 확인 필요</span></td>
+            </tr>
+            <tr class="row-pending">
+              <td class="col-rank">—</td>
+              <td class="cafe-name">내집장만 아카데미</td>
+              <td><a href="https://naver.me/F05U1Scb" target="_blank" rel="noopener">naver.me/F05U1Scb</a></td>
+              <td class="col-views"><span class="badge-pending">멤버 공개 · 확인 필요</span></td>
+            </tr>
+            <tr class="row-pending">
+              <td class="col-rank">—</td>
+              <td class="cafe-name">실전 분양권투자 지원센터</td>
+              <td><a href="https://naver.me/xfbjrKHX" target="_blank" rel="noopener">naver.me/xfbjrKHX</a></td>
+              <td class="col-views"><span class="badge-pending">멤버 공개 · 확인 필요</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════ 03 왜 네이버 카페인가 ══════════ -->
+    <section id="why-cafe" class="section">
+      <h2><span class="sec-num">03</span>왜 네이버 카페인가</h2>
+
+      <h3>선정 이유</h3>
+      <ul class="reason-list">
+        <li><strong>익숙함.</strong> 전문 바이럴 마케터가 아니기에, 작성자 본인에게 가장 익숙한 채널인 카페를 선택했습니다.</li>
+        <li><strong>사용 연령대.</strong> 카페 사용층은 연령대가 높은 편이라 바이럴 광고에 대한 인지가 느립니다.</li>
+        <li><strong>검증된 채널.</strong> 타 레퍼런스 사이트들도 카페에서 바이럴 마케팅을 활발히 진행하고 있습니다.</li>
+        <li><strong>카페지기의 묵인.</strong> 카페지기들도 자기 카페 활성화를 위해 어느 정도 바이럴을 허락하는 분위기입니다.</li>
+      </ul>
+
+      <h3>어려움 — 등업의 벽</h3>
+      <p>카페 가입부터 글을 작성할 수 있는 <strong>등업까지 상당한 시간이 소요</strong>됩니다.
+      많은 카페에 가입하고 글쓰기 권한을 확보하는 것이 관건인데,
+      약 <strong>1~2개월</strong>을 들여 56개 카페 중 <strong>40개 카페의 등업을 완료</strong>했고, 지속적으로 추가 확보 중입니다.</p>
+      <div class="progress-card">
+        <div class="progress-head">
+          <span>글쓰기 권한 확보</span>
+          <span class="progress-num">40 / 56 카페 <em>(71%)</em></span>
+        </div>
+        <div class="progress-track"><i style="--w:71.4%"></i></div>
+      </div>
+    </section>
+
+    <!-- ══════════ 04 분석 및 파악 ══════════ -->
+    <section id="analysis" class="section">
+      <h2><span class="sec-num">04</span>분석 및 파악</h2>
+
+      <!-- 분석 1 -->
+      <article class="analysis">
+        <h3><span class="tag">분석 1</span>카페 게시글은 총 3번의 알고리즘을 탄다</h3>
+        <p>하나의 게시글이 <strong>세 단계의 노출 알고리즘</strong>을 타는 것으로 추정됩니다.
+        즉, 글 하나의 공수 대비 <strong>상당히 가성비가 좋은 채널</strong>이라는 점을 파악했습니다.</p>
+
+        <div class="algo-flow" role="img" aria-label="노출 알고리즘 3단계: 카페 게시판 추천글, 내 카페 인기글, 네이버 메인">
+          <div class="algo-step"><span class="algo-num">1</span>카페 게시판<br>추천글</div>
+          <span class="algo-arrow" aria-hidden="true">→</span>
+          <div class="algo-step"><span class="algo-num">2</span>내 카페<br>인기글</div>
+          <span class="algo-arrow" aria-hidden="true">→</span>
+          <div class="algo-step"><span class="algo-num">3</span>네이버<br>메인</div>
+        </div>
+
+        <div class="shot-grid cols-2">
+          <figure class="shot span-2">
+            <img src="images/analysis1-board-pick.png" alt="카페 게시판 추천글 노출 스크린샷" loading="lazy">
+            <figcaption>① 카페 게시판 추천글</figcaption>
+          </figure>
+          <figure class="shot phone">
+            <img src="images/analysis1-cafe-popular.jpg" alt="내 카페 인기글 노출 스크린샷 — 덕양구에 온기가 장난 아니네요" loading="lazy">
+            <figcaption>② 내 카페 인기글</figcaption>
+          </figure>
+          <figure class="shot phone">
+            <img src="images/analysis1-naver-main.jpg" alt="네이버 메인 노출 스크린샷 — 동안구도 이제 불장 시작인듯요" loading="lazy">
+            <figcaption>③ 네이버 메인</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- 분석 2 -->
+      <article class="analysis">
+        <h3><span class="tag">분석 2</span>카페도 카페 나름 — 바이럴 돌릴 카페 선정 기준</h3>
+        <p><strong>인기글 게시판이 있는 카페</strong>를 선정합니다. 인기글 게시판이 있는 곳과 없는 곳은
+        조회수 차이가 심하고, 게시글에 대한 집중도 자체가 다르다는 것을 파악했습니다.</p>
+
+        <div class="shot-grid cols-1">
+          <figure class="shot">
+            <img src="images/analysis2-with-popular.png" alt="인기글 게시판이 있는 카페의 조회수 스크린샷" loading="lazy">
+            <figcaption>인기글 게시판이 <strong>있는</strong> 경우 — 조회수 수백~수천</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/analysis2-without-popular.png" alt="인기글 게시판이 없는 카페의 조회수 스크린샷" loading="lazy">
+            <figcaption>인기글 게시판이 <strong>없는</strong> 경우 — 조회수 수십~수백</figcaption>
+          </figure>
+        </div>
+
+        <div class="callout">
+          <p><strong>제외 기준</strong> — 조회수가 낮아도 인기글에 가는 카페, 또는 광고가 인기글을 차지하는 카페는 제외합니다.
+          공수 대비 효과가 적고, 광고만 있는 케이스는 매크로 때문에 정상 글이 인기글에 가지 못하는 것으로 추정됩니다.</p>
+        </div>
+
+        <div class="shot-grid cols-1">
+          <figure class="shot">
+            <img src="images/analysis2-ad-only.png" alt="광고가 인기글을 차지한 카페 사례 스크린샷" loading="lazy">
+            <figcaption>제외 사례 — 광고가 인기글을 차지한 카페</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- 분석 3 -->
+      <article class="analysis">
+        <h3><span class="tag">분석 3</span>게시글은 반드시 전체 공개로</h3>
+        <p>게시글을 카페 멤버만 보게 하는 것보다 <strong>전체 공개</strong>로 설정해야 조회수가 더 높다는 것을 파악했습니다.
+        총 <strong>4개의 게시물로 테스트</strong>를 진행했습니다.</p>
+
+        <div class="shot-grid cols-2">
+          <figure class="shot">
+            <img src="images/analysis3-public.png" alt="전체 공개로 설정한 게시글 조회수 스크린샷" loading="lazy">
+            <figcaption>전체 공개로 <strong>했을</strong> 경우</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/analysis3-member.png" alt="멤버 공개로 설정한 게시글 조회수 스크린샷" loading="lazy">
+            <figcaption>전체 공개로 <strong>안 했을</strong> 경우</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <!-- ══════════ 05 결과 ══════════ -->
+    <section id="result" class="section">
+      <h2><span class="sec-num">05</span>결과 — 바이럴의 효과</h2>
+
+      <ul class="result-list">
+        <li>GA 분석 및 보고서에 따르면, 게시글 <strong>평균 조회수의 약 10%</strong>에 해당하는 인원이 서비스로 유입됩니다.</li>
+        <li>바이럴을 돌릴 경우 <strong>DAU의 약 10%를 책임지는 것</strong>으로 확인됐습니다.</li>
+        <li>바이럴의 최종 역할은 <strong>유입을 책임지는 것</strong>입니다.</li>
+        <li>배포한 바이럴 게시글들은 <strong>우리의 자산으로 축적</strong>되어, 검색·인기글 노출을 통해 <strong>주기적으로 유입에 영향</strong>을 줍니다.</li>
+        <li>일반 사용자들이 <strong>바이럴 아이템을 자발적으로 공유</strong>하는 것도 확인했습니다.</li>
+      </ul>
+
+      <div class="shot-grid cols-1">
+        <figure class="shot">
+          <img src="images/result-ga-1.png" alt="GA 유입 분석 스크린샷 1" loading="lazy">
+          <figcaption>GA 유입 분석 ① — 네이버 카페 유입 +172% (217 → 2,188세션)</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/result-ga-2.png" alt="GA 유입 분석 스크린샷 2" loading="lazy">
+          <figcaption>GA 유입 분석 ② — 카페 바이럴 유입 지속 +14.2% (2,238 → 2,556세션)</figcaption>
+        </figure>
+      </div>
+      <div class="shot-grid cols-1">
+        <figure class="shot">
+          <img src="images/result-share.png" alt="일반 사용자가 바이럴 아이템을 공유한 사례 스크린샷" loading="lazy">
+          <figcaption>일반 사용자의 자발적 공유 사례</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ══════════ 06 다음 스텝 ══════════ -->
+    <section id="next" class="section">
+      <h2><span class="sec-num">06</span>다음 스텝 — 실거래가 알리미</h2>
+
+      <p class="section-lead">실거래를 갱신한 단지를 <strong>데일리로 각 지역 카페에 바이럴</strong>하는 다음 아이템입니다.</p>
+
+      <div class="next-grid">
+        <div class="card">
+          <p class="card-label">리스크</p>
+          <p class="card-desc">타 서비스들이 이미 같은 바이럴을 진행 중입니다. 후발 주자인 만큼, 첫 서비스였던 「수도권 아파트 주간 가격 변동」보다 파급력과 조회수는 낮을 것으로 예상합니다.</p>
+        </div>
+        <div class="card">
+          <p class="card-label">차별화</p>
+          <p class="card-desc">디자인 및 UX 개선으로 차별성을 확보합니다. 타 서비스에는 없는 <strong>쉬운 사진 저장 기능</strong>을 개발해 공유 편의를 높입니다.</p>
+        </div>
+        <div class="card">
+          <p class="card-label">운영 주기</p>
+          <p class="card-desc">「수도권 아파트 주간 가격 변동」은 위클리로 운영하지만, 실거래가 알리미는 <strong>데일리로 돌릴 수 있는 아이템</strong>이라 노출 빈도가 크게 늘어납니다.</p>
+        </div>
+      </div>
+
+      <div class="shot-grid cols-2">
+        <figure class="shot">
+          <img src="images/next-step-1.png" alt="실거래가 알리미 시안 1" loading="lazy">
+          <figcaption>실거래가 알리미 시안 ①</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="images/next-step-2.png" alt="실거래가 알리미 시안 2" loading="lazy">
+          <figcaption>실거래가 알리미 시안 ②</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>프롭테크운영UNIT · 가동재 — 워크샵 공유자료 · 조회수는 2026. 8. 10 기준</p>
+    </footer>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
