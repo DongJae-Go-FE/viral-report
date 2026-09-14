@@ -331,7 +331,7 @@ strong { font-weight: 700; color: var(--ink); }
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
-  min-width: 640px;
+  min-width: 780px;
 }
 .report-table th {
   text-align: left;
@@ -364,6 +364,12 @@ strong { font-weight: 700; color: var(--ink); }
 }
 .report-table a { color: var(--ink-2); }
 .report-table a:hover { color: var(--accent-ink); }
+.col-date {
+  width: 100px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
 .col-views { width: 230px; }
 .views {
   display: flex;
