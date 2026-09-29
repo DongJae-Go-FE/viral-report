@@ -660,3 +660,34 @@ strong { font-weight: 700; color: var(--ink); }
   .shot-grid.cols-2 { grid-template-columns: 1fr; }
   .layout { padding: 0 20px; }
 }
+
+/* ── 확보한 카페 채널 ── */
+.channel-directory {
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.channel-directory summary { cursor: pointer; font-weight: 700; }
+.channel-directory summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.channel-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 32px;
+  margin-top: 20px;
+  padding-left: 28px;
+  font-size: 0.85rem;
+}
+.channel-list li { min-width: 0; padding-left: 4px; }
+.channel-list a { overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .channel-list { grid-template-columns: minmax(0, 1fr); }
+}
+@media print {
+  .channel-directory::details-content { content-visibility: visible; }
+  .channel-directory > .channel-list { display: grid !important; }
+}
