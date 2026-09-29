@@ -683,7 +683,9 @@ strong { font-weight: 700; color: var(--ink); }
   font-size: 0.85rem;
 }
 .channel-list li { min-width: 0; padding-left: 4px; }
-.channel-list a { overflow-wrap: anywhere; }
+.channel-list a { display: block; padding: 4px 0; overflow-wrap: anywhere; }
+.channel-name { display: block; font-weight: 600; }
+.channel-url { display: block; color: var(--ink-2); font-size: 0.8rem; }
 @media (max-width: 640px) {
   .channel-list { grid-template-columns: minmax(0, 1fr); }
 }
