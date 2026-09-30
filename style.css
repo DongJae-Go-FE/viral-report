@@ -315,6 +315,15 @@ strong { font-weight: 700; color: var(--ink); }
   margin-bottom: var(--s4);
 }
 .section-lead .muted { display: block; margin-top: var(--s1); font-size: var(--fs-small); line-height: 1.6; }
+.section-lead .muted + .muted { margin-top: 2px; }
+.section h3 + .section-lead { margin-top: var(--s1); }
+.table-note {
+  margin-top: 12px;
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+.section p.table-note { color: var(--ink-3); max-width: 60em; }
 
 /* ── 카드 ── */
 .card {
