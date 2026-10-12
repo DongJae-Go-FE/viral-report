@@ -18,6 +18,16 @@ def page(value='1,234'):
 
 
 class SafetyTests(unittest.TestCase):
+    def test_unavailable_host_stops_after_five_failures(self):
+        items=[{'url':f'https://www.fmkorea.com/{123456+i}','views':100} for i in range(7)]
+        calls=[]
+        def failed(url):
+            calls.append(url)
+            raise TimeoutError()
+        result=r.collect(items,failed,0)
+        self.assertEqual(len(calls),5)
+        self.assertEqual(len(result),7)
+        self.assertEqual(r.changes(items,result),{})
     def test_hogang_rejects_related_and_hidden_counts(self):
         def payload(identity=123,hidden=False):
             q={'queryKey':[{'entity':'getReviewById','params':{'reviewId':identity}}],

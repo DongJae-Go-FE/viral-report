@@ -93,7 +93,7 @@ def main():
                 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 config = json.loads((root / 'automation/calendar.json').read_text())
                 if not config.get('collector_ready'):
-                    raise ValueError('server activation not approved/validated')
+                    raise ValueError('server collector is not enabled')
                 local_date = now.astimezone(ZoneInfo('Asia/Seoul')).date()
                 if (not config.get('reviewed') or config.get('year') != local_date.year
                         or not config['valid_from'] <= local_date.isoformat() <= config['valid_through']
@@ -101,7 +101,8 @@ def main():
                     raise ValueError('holiday or unverified calendar date')
                 print(name + ': ' + sync(name, root, allowed, now, args.apply))
         except Exception as exc:
-            print(name + ': skipped (' + type(exc).__name__ + ')')
+            reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+            print(name + ': skipped (' + reason + ')')
 
 
 if __name__ == '__main__':

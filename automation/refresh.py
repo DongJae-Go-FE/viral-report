@@ -190,6 +190,7 @@ def records(root):
 
 def collect(items, fetch=get_page, delay=1.0):
     results = {}
+    failures = collections.Counter()
     for item in items:
         url = item['url']
         if url in results:
@@ -197,6 +198,9 @@ def collect(items, fetch=get_page, delay=1.0):
         host = urllib.parse.urlsplit(url).hostname
         if item['views'] is None or host not in {*PATTERNS, 'cafe.naver.com', 'hogangnono.com'}:
             results[url] = {'status': 'unavailable', 'reason': 'no validated public exact counter'}
+            continue
+        if failures[host] >= 5:
+            results[url] = {'status': 'unavailable', 'reason': 'host unavailable after five consecutive failures'}
             continue
         try:
             if host == 'cafe.naver.com':
@@ -208,10 +212,16 @@ def collect(items, fetch=get_page, delay=1.0):
             if value < item['views'] or value > max(item['views'] * 3, item['views'] + 10000):
                 raise ValueError('counter regression or unusual increase')
             results[url] = {'status': 'ok', 'views': value}
+            failures[host] = 0
         except Exception as exc:
             # Never include response bodies, headers, cookies or exception URL details.
             results[url] = {'status': 'unavailable', 'reason': type(exc).__name__}
+            failures[host] += 1
         if delay:
+            if failures[host] == 5:
+                print('Preserving remaining values for unavailable host: ' + host, flush=True)
+            elif len(results) % 25 == 0:
+                print('Checked records: ' + str(len(results)), flush=True)
             time.sleep(delay)
     return results
 
