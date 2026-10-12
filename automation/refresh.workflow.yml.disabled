@@ -1,0 +1,61 @@
+# Installation template; collector_ready gates scheduled writes.
+# Existing account Actions $0 Stop usage=Yes verified in Chrome on 2026-10-12.
+# contents:write for this job approved. Server execution verification remains.
+name: Scheduled view refresh
+on:
+  push:
+    branches: [main]
+    paths: ['automation/**', '.github/workflows/refresh.yml']
+  schedule:
+    - cron: '0 0,6 * * 1-5' # 09:00 and 15:00 Asia/Seoul
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Apply verified updates and push (false performs a read-only collection)'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: viral-view-refresh-main
+  cancel-in-progress: false
+jobs:
+  refresh:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10 # Bounds execution, does NOT guarantee zero billing.
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22.22.0'
+      - name: Install guide dependencies
+        if: github.repository == 'DongJae-Go-FE/viral-guide'
+        run: |
+          npm install --global pnpm@10.22.0
+          pnpm install --frozen-lockfile
+      - name: Safety tests
+        run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s automation -p 'test_*.py'
+      - name: Read-only collection
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.apply)
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/refresh.py --scheduled
+      - name: Validate guide build
+        if: github.repository == 'DongJae-Go-FE/viral-guide' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.apply))
+        run: pnpm lint && pnpm build
+      - name: Validate report JavaScript
+        if: github.repository == 'DongJae-Go-FE/viral-report'
+        run: node --check script.js
+      - name: Refresh
+        if: github.event_name == 'schedule' || inputs.apply
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/refresh.py --scheduled --apply
+      - name: Validate and publish only data changes
+        if: github.event_name == 'schedule' || inputs.apply
+        id: publish
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/publish.py
+      # viral-report needs separately approved pages:write for the existing
+      # POST /repos/DongJae-Go-FE/viral-report/pages/builds endpoint after a push.
+      # No id-token permission or Pages configuration change is proposed.

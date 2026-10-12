@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.dongjae.viral-sync</string>
+  <key>ProgramArguments</key><array>
+    <string>REPLACE_WITH_VERIFIED_PYTHON3_ABSOLUTE_PATH</string>
+    <string>/Users/kardongjae/Development/viral-guide/automation/sync_local.py</string>
+    <string>--apply</string>
+  </array>
+  <!-- launchd calendar uses the Mac's local timezone. Install only after confirming Asia/Seoul. -->
+  <key>StartCalendarInterval</key><array>
+    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>20</integer></dict>
+    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>40</integer></dict>
+    <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>20</integer></dict>
+    <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>40</integer></dict>
+  </array>
+  <key>RunAtLoad</key><false/>
+  <key>ProcessType</key><string>Background</string>
+  <key>StandardOutPath</key><string>/tmp/viral-sync.log</string>
+  <key>StandardErrorPath</key><string>/tmp/viral-sync-error.log</string>
+</dict></plist>
