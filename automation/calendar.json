@@ -1,6 +1,6 @@
 {
   "reviewed": true,
-  "collector_ready": false,
+  "collector_ready": true,
   "year": 2026,
   "reviewed_on": "2026-10-12",
   "holidays": [
@@ -10,7 +10,7 @@
     "kasi": "dca047072c53262c84bd0254ffeadf129f71ef5b05afe13e540b2fb59439ea32",
     "mpm": "9fbef8fe8ede8541112c405a981a4649c9626f09bdd5c24342d7d6ced66b17a5"
   },
-  "reason": "Official sources reviewed for remaining 2026 dates. Changed source or uncovered date blocks. Collector and billing activation prerequisites remain separate.",
+  "reason": "2026 calendar reviewed; local and Linux collection/tests/build validated. Live source changes block; temporary network failure allowed only within seven-day review grace.",
   "valid_from": "2026-10-12",
   "valid_through": "2026-12-31",
   "sources": [
@@ -18,5 +18,6 @@
     "https://www.mpm.go.kr/mpm/comm/newsPress/newsPressRelease/?mode=list&pageIdx=1&searchCondition=title&searchKeyword=%EA%B3%B5%ED%9C%B4%EC%9D%BC",
     "https://www.kasi.re.kr/kor/publication/post/newsMaterial/32031",
     "https://www.mpm.go.kr/mpm/comm/newsPress/newsPressRelease/?boardId=bbs_0000000000000029&mode=view&cntId=4250&category=&pageIdx=1"
-  ]
+  ],
+  "offline_valid_through": "2026-10-19"
 }

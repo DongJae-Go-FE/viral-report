@@ -3,9 +3,6 @@
 # contents:write for this job approved. Server execution verification remains.
 name: Scheduled view refresh
 on:
-  push:
-    branches: [main]
-    paths: ['automation/**', '.github/workflows/refresh.yml']
   schedule:
     - cron: '0 0,6 * * 1-5' # 09:00 and 15:00 Asia/Seoul
   workflow_dispatch:
@@ -21,10 +18,13 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
+    outputs:
+      changed: ${{ steps.publish.outputs.changed }}
+      sha: ${{ steps.publish.outputs.sha }}
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10 # Bounds execution, does NOT guarantee zero billing.
+    timeout-minutes: 15 # Bounds execution, does NOT guarantee zero billing.
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -59,6 +59,21 @@ jobs:
         if: github.event_name == 'schedule' || inputs.apply
         id: publish
         run: PYTHONDONTWRITEBYTECODE=1 python3 automation/publish.py
-      # viral-report needs separately approved pages:write for the existing
-      # POST /repos/DongJae-Go-FE/viral-report/pages/builds endpoint after a push.
-      # No id-token permission or Pages configuration change is proposed.
+  rebuild-pages:
+    needs: refresh
+    if: github.repository == 'DongJae-Go-FE/viral-report' && needs.refresh.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.refresh.outputs.sha }}
+          persist-credentials: false
+      - name: Rebuild existing Pages site and verify commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ needs.refresh.outputs.sha }}
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/rebuild_pages.py

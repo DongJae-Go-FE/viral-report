@@ -18,6 +18,7 @@ import subprocess
 import tempfile
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 from zoneinfo import ZoneInfo
 
@@ -406,6 +407,13 @@ def calendar_gate(config, now, fetch=get_page):
     for kind, url in [('kasi', KASI), ('mpm', MPM)]:
         try:
             fingerprint = source_fingerprint(fetch(url), kind)
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            reviewed = dt.date.fromisoformat(config['reviewed_on'])
+            offline_until = dt.date.fromisoformat(config.get('offline_valid_through', '1900-01-01'))
+            if reviewed <= local.date() <= min(offline_until, reviewed + dt.timedelta(days=7)):
+                print('Using reviewed calendar during temporary source failure: ' + kind, flush=True)
+                continue
+            raise ValueError('official calendar unavailable and offline review expired: ' + kind) from None
         except Exception as exc:
             raise ValueError('official calendar source unavailable: ' + kind + ' (' + type(exc).__name__ + ')') from None
         if fingerprint != config['fingerprints'][kind]:

@@ -18,6 +18,16 @@ def page(value='1,234'):
 
 
 class SafetyTests(unittest.TestCase):
+    def test_calendar_offline_grace_is_bounded(self):
+        cfg={'reviewed':True,'year':2026,'reviewed_on':'2026-10-12',
+             'valid_from':'2026-10-12','valid_through':'2026-12-31',
+             'offline_valid_through':'2026-10-19','holidays':[], 'fingerprints':{}}
+        def failed(url):raise TimeoutError()
+        self.assertTrue(r.calendar_gate(cfg,NOW,failed))
+        cfg['holidays']=['2026-10-12']
+        self.assertFalse(r.calendar_gate(cfg,NOW,failed))
+        with self.assertRaises(ValueError):r.calendar_gate(cfg,NOW+dt.timedelta(days=8),failed)
+        with self.assertRaises(ValueError):r.calendar_gate(cfg,NOW,lambda _: 'unrecognized source')
     def test_unavailable_host_stops_after_five_failures(self):
         items=[{'url':f'https://www.fmkorea.com/{123456+i}','views':100} for i in range(7)]
         calls=[]
