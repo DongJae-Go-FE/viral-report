@@ -379,7 +379,11 @@ def calendar_gate(config, now, fetch=get_page):
     if not config['valid_from'] <= local.date().isoformat() <= config['valid_through']:
         raise ValueError('outside verified holiday coverage')
     for kind, url in [('kasi', KASI), ('mpm', MPM)]:
-        if source_fingerprint(fetch(url), kind) != config['fingerprints'][kind]:
+        try:
+            fingerprint = source_fingerprint(fetch(url), kind)
+        except Exception as exc:
+            raise ValueError('official calendar source unavailable: ' + kind + ' (' + type(exc).__name__ + ')') from None
+        if fingerprint != config['fingerprints'][kind]:
             raise ValueError('official holiday announcements changed; review required')
     return local.date().isoformat() not in config['holidays']
 
@@ -389,6 +393,7 @@ def main():
     ap.add_argument('--root', type=Path, default=Path.cwd())
     ap.add_argument('--apply', action='store_true')
     ap.add_argument('--scheduled', action='store_true')
+    ap.add_argument('--calendar-only', action='store_true')
     ap.add_argument('--probe', help='read a single public article without modifying files')
     args = ap.parse_args()
     root = args.root.resolve()
@@ -401,6 +406,9 @@ def main():
     with lockpath.open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         config = json.loads((root / 'automation/calendar.json').read_text())
+        if args.calendar_only:
+            print('Calendar check: ' + ('eligible weekday' if calendar_gate(config, now) else 'holiday/weekend'))
+            return
         if args.scheduled and not calendar_gate(config, now):
             print('Skipped: weekend or official Korean holiday')
             return
@@ -417,13 +425,15 @@ def main():
         snapshot = collect(items)
         ok = sum(snapshot[i['url']]['status'] == 'ok' for i in items if i['views'] is not None)
         numeric = sum(i['views'] is not None for i in items)
+        direct = [i for i in items if i['group'] == 'posts']
+        direct_ok = sum(snapshot[i['url']]['status'] == 'ok' for i in direct)
         output = plan(root, snapshot, now)
         print(json.dumps({'exact_counts': ok, 'numeric_records': numeric, 'preserved_records': numeric-ok,
+                          'direct_exact_counts': direct_ok, 'direct_records': len(direct),
                           'changed_files': [str(p.relative_to(root)) for p in output],
                           'mode': 'apply' if args.apply else 'dry-run'}, ensure_ascii=False))
         if args.apply:
-            direct = [i for i in items if i['group'] == 'posts']
-            if sum(snapshot[i['url']]['status'] == 'ok' for i in direct) / max(1,len(direct)) < .9:
+            if direct_ok / max(1,len(direct)) < .9:
                 raise ValueError('less than 90% verified; preserving all files')
             # Validate all planned replacements before making any file changes.
             for p, content in output.items():
