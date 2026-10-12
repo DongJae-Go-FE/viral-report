@@ -109,7 +109,21 @@ def parse_counter(url, body):
         links = re.findall(r'"No"\s*:\s*"\d+"', body)
     else:
         article = urllib.parse.urlsplit(url).path.strip('/')
-    if not article or not any(article in html.unescape(tag) for tag in links):
+    if host == 'm.bobaedream.co.kr':
+        identities = re.findall(r'"No"\s*:\s*"(\d+)"', body)
+    else:
+        identities = []
+        for tag in links:
+            for candidate in re.findall(r'(?:content|href)=[\'"]([^\'"]+)', tag):
+                parsed = urllib.parse.urlsplit(html.unescape(candidate))
+                if parsed.hostname != host:
+                    continue
+                identity = (urllib.parse.parse_qs(parsed.query).get('id', [''])[0]
+                            if host == 'mlbpark.donga.com' else
+                            parsed.path.rsplit('-', 1)[-1] if host == 'www.teamblind.com'
+                            else parsed.path.strip('/'))
+                identities.append(identity)
+    if not article or article not in identities:
         raise ValueError('article identity not confirmed')
     hits = re.findall(PATTERNS[host], body)
     if len(hits) != 1 or not re.fullmatch(r'(?:\d+|\d{1,3}(?:,\d{3})+)', hits[0]):
@@ -291,6 +305,7 @@ def plan(root, snapshot, now):
     if not updates:
         return {}
     when = stamp(now)
+    guide_summary = f'확인 시도: {when} · 미확인 항목은 이전 값 유지'
     output = {}
     verified = {i['url']: snapshot[i['url']]['views'] for i in items
                 if snapshot.get(i['url'], {}).get('status') == 'ok' and i['views'] is not None}
@@ -312,13 +327,13 @@ def plan(root, snapshot, now):
         p = root / 'src/content/overview.mdx'
         old = p.read_text()
         note = ('게시글 목록은 바이럴 마케팅 리포트에서 가져왔습니다. 공개 조회수를 확인한 글만 갱신했습니다. '
-                '확인하지 못한 글은 이전 값과 항목에 남아 있는 확인 시각을 유지했습니다.\n\n' + summary('posts'))
+                '확인하지 못한 글은 이전 값과 항목에 남아 있는 확인 시각을 유지했습니다.\n\n' + guide_summary)
         output[p] = re.sub(r'(<Callout type="info" title="숫자 기준">).*?(</Callout>)',
                            lambda m: m[1]+'\n'+note+'\n'+m[2], old, count=1, flags=re.S)
         p = root / 'src/content/results.mdx'
         text = p.read_text()
         for group, title in [('posts','게시글 집계 기준'), ('shares','확산 사례 집계 기준')]:
-            content = (summary(group) + '\n\n확인하지 못한 항목은 이전 값과 기존 확인 시각을 유지합니다. '
+            content = (guide_summary + '\n\n확인하지 못한 항목은 이전 값과 기존 확인 시각을 유지합니다. '
                        '항목별 메모를 함께 확인해 주세요.')
             text = re.sub(r'(<Callout type="info" title="'+title+r'">).*?(</Callout>)',
                           lambda m: m[1]+'\n'+content+'\n'+m[2], text, count=1, flags=re.S)

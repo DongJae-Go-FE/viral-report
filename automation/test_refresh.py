@@ -69,7 +69,7 @@ class SafetyTests(unittest.TestCase):
                 self.assertIn('data-auto-summary="true"',content)
     def test_exact_counter_and_identity(self):
         self.assertEqual(r.parse_counter(URL, page()), 1234)
-        for body in [page('1.2만'), page('1,23'), page()+page(), page().replace('123456', '888')]:
+        for body in [page('1.2만'), page('1,23'), page()+page(), page().replace('123456', '888'), page().replace('123456', '1234567')]:
             with self.assertRaises(ValueError):
                 r.parse_counter(URL, body)
 
