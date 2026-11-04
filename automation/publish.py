@@ -38,7 +38,7 @@ def main():
     # Same identities must survive every update; numerical checks are done before publishing.
     items = records(root)
     posts = [x for x in items if x['group'] == 'posts']
-    if len(posts) != 151 or len(items) != 190 or len({i['url'] for i in items}) != len(items):
+    if len(posts) != 164 or len(items) != 211 or len({i['url'] for i in items}) != len(items):
         raise ValueError('unexpected item count/duplicate source')
     git(root, 'diff', '--check')
     if guide:
