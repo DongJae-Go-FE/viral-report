@@ -383,7 +383,7 @@ def plan(root, snapshot, now):
 
 def source_fingerprint(body, kind):
     if kind == 'kasi':
-        parts = re.findall(r'https://gwanbo\.go\.kr/[^\'"<>\s]+', body)
+        parts = re.findall(r'https://(?:www\.)?gwanbo\.go\.kr/[^\'"<>\s]+', body)
     else:
         parts = []
         for href, title in re.findall(r'<a[^>]+href="([^"]*cntId=\d+[^"]*)"[^>]*>(.*?)</a>', body, re.S):
@@ -400,11 +400,15 @@ def calendar_gate(config, now, fetch=get_page):
     local = now.astimezone(KST)
     if local.weekday() >= 5:
         return False
+    config = config.get('reviewed_years', {}).get(str(local.year), config)
     if not config.get('reviewed') or config.get('year') != local.year:
         raise ValueError('official holiday calendar not reviewed for this year')
     if not config['valid_from'] <= local.date().isoformat() <= config['valid_through']:
         raise ValueError('outside verified holiday coverage')
-    for kind, url in [('kasi', KASI), ('mpm', MPM)]:
+    sources = config.get('source_urls', {'kasi': KASI, 'mpm': MPM})
+    if set(sources) != {'kasi', 'mpm'}:
+        raise ValueError('both official calendar sources are required')
+    for kind, url in sources.items():
         try:
             fingerprint = source_fingerprint(fetch(url), kind)
         except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:

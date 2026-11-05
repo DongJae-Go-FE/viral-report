@@ -95,6 +95,7 @@ def main():
                 if not config.get('collector_ready'):
                     raise ValueError('server collector is not enabled')
                 local_date = now.astimezone(ZoneInfo('Asia/Seoul')).date()
+                config = config.get('reviewed_years', {}).get(str(local_date.year), config)
                 if (not config.get('reviewed') or config.get('year') != local_date.year
                         or not config['valid_from'] <= local_date.isoformat() <= config['valid_through']
                         or local_date.isoformat() in config['holidays']):

@@ -19,5 +19,57 @@
     "https://www.kasi.re.kr/kor/publication/post/newsMaterial/32031",
     "https://www.mpm.go.kr/mpm/comm/newsPress/newsPressRelease/?boardId=bbs_0000000000000029&mode=view&cntId=4250&category=&pageIdx=1"
   ],
-  "offline_valid_through": "2026-10-19"
+  "offline_valid_through": "2026-10-19",
+  "reviewed_years": {
+    "2027": {
+      "reviewed": true,
+      "collector_ready": true,
+      "year": 2027,
+      "reviewed_on": "2026-11-05",
+      "valid_from": "2027-01-01",
+      "valid_through": "2027-12-31",
+      "offline_valid_through": "2026-11-12",
+      "holidays": [
+        "2027-01-01",
+        "2027-02-06",
+        "2027-02-07",
+        "2027-02-08",
+        "2027-02-09",
+        "2027-03-01",
+        "2027-05-01",
+        "2027-05-03",
+        "2027-05-05",
+        "2027-05-13",
+        "2027-06-06",
+        "2027-07-17",
+        "2027-07-19",
+        "2027-08-15",
+        "2027-08-16",
+        "2027-09-14",
+        "2027-09-15",
+        "2027-09-16",
+        "2027-10-03",
+        "2027-10-04",
+        "2027-10-09",
+        "2027-10-11",
+        "2027-12-25",
+        "2027-12-27"
+      ],
+      "source_urls": {
+        "kasi": "https://astro.kasi.re.kr/kor/life/post/almanac?search_year=2027",
+        "mpm": "https://www.mpm.go.kr/mpm/comm/newsPress/newsPressRelease/?mode=list&pageIdx=1&searchCondition=title&searchKeyword=%EA%B3%B5%ED%9C%B4%EC%9D%BC"
+      },
+      "fingerprints": {
+        "kasi": "21c52e663dc23dd976f1448419c181329bf87346add9914c987d8ff1017588d8",
+        "mpm": "9fbef8fe8ede8541112c405a981a4649c9626f09bdd5c24342d7d6ced66b17a5"
+      },
+      "sources": [
+        "https://astro.kasi.re.kr/kor/life/post/almanac?search_year=2027",
+        "https://www.kasa.go.kr/prog/plcyBrf/brief/kor/sub01_01_04/view.do?plcyBrfNo=431",
+        "https://www.gwanbo.go.kr/ezpdf/customLayout.jsp?contentId=I0000000000000001782374733940000&tocId=I0000000000000001782199865342000&isTocOrder=N"
+      ],
+      "gazette_pdf_sha256": "10412c8632ab2e8e9937cbd3a8fa6ee184e08cbd9aa541dd4d44229cb11a67b3",
+      "reason": "Reviewed 2026-06-29 official gazette notice 2026-0078, holiday table page 4, cross-checked KASA release. National holidays only; regional public-office holidays are not nationwide. Source changes fail closed; no 2027 offline grace is pre-authorized."
+    }
+  }
 }
