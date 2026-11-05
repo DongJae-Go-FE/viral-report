@@ -1,3 +1,20 @@
+# Mac 조회수 자동 갱신 (2026-11-05 전환)
+
+- Mac 시스템 시간대 Asia/Seoul에서 한국 평일 09:00에 Mac LaunchAgent `com.dongjae.viral-refresh`가 실행합니다. 주말 및 기존 검토된 한국 공휴일은 제외합니다.
+- 실제 실행 파일: `~/Library/Application Support/viral-sync/refresh_mac.py`. 두 저장소의 `automation/refresh_mac.py`는 설치본의 추적 가능한 사본입니다.
+- 원본 작업 폴더는 깨끗한 main, 지정된 origin, 원격 main 일치 상태여야 합니다. 임시 복제본에서 공식 달력 검사, 공개 수집, 90% 확인 기준, 데이터 구조 검사 및 빌드/구문 검사를 통과한 경우에만 허용 파일을 일반 commit/push합니다. 사용자 수정, staged/untracked 파일, Git 작업 또는 분기가 있으면 중단합니다. reset/stash/rebase/force-push는 하지 않습니다.
+- 공개 응답만 수집하며 쿠키나 로그인 세션을 사용하지 않습니다. Git에는 기존 osxkeychain 인증을 사용하고 새 인증키를 만들지 않습니다.
+- 변경이 없으면 커밋하지 않습니다. 성공한 날짜는 `refresh-state.json`에 기록해 같은 날 반복 실행을 막습니다. 실패는 로그에 남고 다음 예약/로그인 실행에서 재시도할 수 있습니다.
+- `refresh.log`와 `refresh-error.log`는 같은 Application Support 폴더에 있습니다. 수동 검증은 `python3 automation/refresh_mac.py` (원본/원격 쓰기 없는 임시 복제본 검증), 실제 실행은 `--apply`입니다.
+- 잠자는 동안 놓친 실행은 깨어난 후 합쳐서 실행됩니다. 종료된 Mac은 동작하지 않으며 재부팅 후 사용자 로그인이 필요합니다. 로그인 후 09:00 이후라면 당일 미완료 작업을 실행합니다. 실행 중 유휴 잠자기만 caffeinate로 막으며 강제 깨우기나 전원 설정 변경은 하지 않았습니다.
+- 공휴일 검토는 2026-12-31까지 유효합니다. 2027년 달력을 별도로 검토해야 하며, 공식 출처 불일치/접속 불가 및 유효기간 초과는 안전하게 중단합니다.
+- 기존 `com.dongjae.viral-sync`는 검증된 데이터 커밋만 내려받는 안전한 동기화 작업으로 유지합니다. 조회수를 수집하거나 push하지 않으므로 중복 게시하지 않습니다.
+- GitHub의 조회수 예약 수집은 Mac 실수집·커밋·push 검증 후 제거했습니다. report의 Pages 재빌드 기능은 별도 `pages.yml`로 유지합니다.
+
+아래는 이전 서버 방식의 구현 기록입니다. 현재 일정과 실행 방식은 위 내용을 따릅니다.
+
+---
+
 # 조회수 자동화 구현 상태
 
 2026-10-12 기준 구현과 로컬 검증을 진행 중입니다. 서버 workflow와 Mac launchd를 설치했으며 `collector_ready`는 true입니다. 기존 데이터는 이 구현 작업으로 변경하지 않았습니다.

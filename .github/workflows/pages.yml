@@ -1,0 +1,28 @@
+name: Rebuild report Pages
+on:
+  push:
+    branches: [main]
+    paths: [index.html]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: viral-report-pages
+  cancel-in-progress: false
+jobs:
+  rebuild-pages:
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Rebuild existing Pages site and verify commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/rebuild_pages.py
