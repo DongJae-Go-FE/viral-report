@@ -6,6 +6,11 @@ from unittest.mock import patch
 import refresh_mac as m
 
 class Safety(unittest.TestCase):
+    def test_current_dataset_matches_expected_counts(self):
+        root = Path(__file__).resolve().parents[1]
+        with patch.object(Path, 'cwd', return_value=root):
+            exec(m.DATA_CHECK, {})
+
     def test_time_gate(self):
         # UTC midnight is 09:00 in Korea.
         self.assertFalse(m.eligible(dt.datetime(2026, 11, 5, 23, 59, tzinfo=dt.timezone.utc) - dt.timedelta(days=1)))

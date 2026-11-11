@@ -38,7 +38,7 @@ from refresh import records
 root = Path.cwd()
 items = records(root)
 posts = [x for x in items if x['group'] == 'posts']
-if len(posts) != 164 or len(items) != 211 or len({i['url'] for i in items}) != len(items):
+if len(posts) != 175 or len(items) != 222 or len({i['url'] for i in items}) != len(items):
     raise ValueError('unexpected item count or duplicate source')
 if not (root / 'src/data/posts.ts').exists():
     values = [x['views'] for x in posts]
